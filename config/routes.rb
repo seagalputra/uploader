@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'storages/index'
+  resources 'users'
   
-  root 'storages#index'
+  root 'users#index'
 end
