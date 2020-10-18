@@ -1,8 +1,8 @@
 require 'test_helper'
 
-class UsersControllerTest < ActionDispatch::IntegrationTest
+class BucketsControllerTest < ActionDispatch::IntegrationTest
   test "should get index" do
-    get users_index_url
+    get buckets_index_url
     assert_response :success
   end
 

@@ -1,7 +1,9 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  username: MyString
+  filename: MyString
+  size: 1
 
 two:
-  username: MyString
+  filename: MyString
+  size: 1

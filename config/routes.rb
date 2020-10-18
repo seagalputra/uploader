@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources 'users'
+  resources 'buckets'
   
-  root 'users#index'
+  root 'buckets#index'
 end

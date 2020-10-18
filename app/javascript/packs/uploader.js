@@ -6,9 +6,11 @@ fileInput.addEventListener('change', (event) => {
 
   const formData = new FormData();
   formData.append('authenticity_token', token)
-  formData.append('user[images]', imageFile)
+  formData.append('bucket[filename]', imageFile.name)
+  formData.append('bucket[size]', imageFile.size)
+  formData.append('bucket[images]', imageFile)
 
-  fetch('/users', {
+  fetch('/buckets', {
     method: 'POST',
     body: formData
   })
