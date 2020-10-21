@@ -10,6 +10,9 @@ class BucketsController < ApplicationController
     @bucket.save
   end
 
+  def show
+  end
+
   private
   def bucket_params
     params.require(:bucket).permit(:filename, :size, :images)
