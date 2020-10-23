@@ -1,16 +1,18 @@
 <div class="flex content-center justify-center flex-wrap h-screen">
-  <div class="text-center px-10 py-10 bg-white shadow-md rounded-xl w-4/12">
+  <div id="upload-zone" class="text-center px-10 py-10 bg-white shadow-md rounded-xl w-4/12">
     <h1 class="text-3xl text-gray-700 pb-4">Upload your image</h1>
     <h2 class="text-md text-gray-500 pb-10">File should be Jpeg, Png,...</h2>
     <div class="flex flex-col justify-center content-center border-2 border-dashed border-blue-300 bg-gray-100 rounded-xl px-8 py-10">
       <%= image_pack_tag 'upload-placeholder.svg', class: 'mb-6' %>
       <p class="text-lg text-gray-500">Drag & Drop your image here</p>
     </div>
-
     <p class="text-gray-500 mt-4 mb-8">Or</p>
-    <label for="image-upload" id="submit" class="bg-blue-500 rounded-md text-white font-sans py-3 px-4 hover:bg-blue-700 cursor-pointer">Choose a file</label>
-    <input type="file" name="image-upload" id="image-upload" class="hidden">
+    <%= form_with id: "upload-form" do %>
+      <%= label_tag :buckets_images_attachments, "Choose a file", class: "bg-blue-500 rounded-md text-white font-sans py-3 px-4 hover:bg-blue-700 cursor-pointer" %>
+      <%= file_field :buckets_images, :attachments, multiple: false, direct_upload: true, class: "hidden", :name => "buckets[images]" %>
+    <% end %>
   </div>
+  <%= render "loading" %>
 </div>
 
 <%= javascript_pack_tag 'uploader', 'data-turbolinks-track': 'reload' %>
