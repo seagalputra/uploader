@@ -14,6 +14,8 @@ jobs:
         with:
           cmd: install
       - name: Build and run tests
+        env:
+          RAILS_ENV: test
         run: |
           sudo apt-get -yqq install libsqlite3-dev
           gem install bundler
