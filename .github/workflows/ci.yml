@@ -1,9 +1,14 @@
 name: Uploader
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v1
       - name: Setup Ruby
@@ -13,6 +18,7 @@ jobs:
       - uses: borales/actions-yarn@v2.0.0
         with:
           cmd: install
+
       - name: Build and run tests
         env:
           RAILS_ENV: test
@@ -21,4 +27,12 @@ jobs:
           gem install bundler
           bundle install --jobs 4 --retry 3
           bundle exec rails db:prepare
+          bundle exec rails db:migrate
           bundle exec rails test
+
+      - name: Deploy to Heroku
+        uses: akhileshns/heroku-deploy@v3.6.8
+        with:
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_app_name: 'anyups'
+          heroku_email: 'seagalputra@gmail.com'
