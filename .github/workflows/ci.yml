@@ -17,6 +17,7 @@ jobs:
         run: |
           sudo apt-get -yqq install libsqlite3-dev
           gem install bundler
-          bundle install --jobs 4 --retry 3 --binstubs
+          bundle install --jobs 4 --retry 3
+          rails assets:precompile
           bundle exec rails db:prepare
           bundle exec rails test
