@@ -37,13 +37,3 @@ jobs:
           bundle install --jobs 4 --retry 3
           bundle exec rails db:prepare
           bundle exec rails test
-
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Deploy to Heroku
-        uses: akhileshns/heroku-deploy@v3.6.8
-        with:
-          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
-          heroku_app_name: 'anyups'
-          heroku_email: 'seagalputra@gmail.com'
