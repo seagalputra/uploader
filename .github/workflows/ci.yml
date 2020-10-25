@@ -1,29 +1,26 @@
 name: Uploader
-on:
-  push:
-    branches:
-      - master
-  pull_request:
-    branches:
-      - master
+on: [push, pull_request]
 jobs:
   test:
     runs-on: ubuntu-latest
     services:
       db:
         image: postgres:11
-        ports: ['5432': '5432']
+        ports: ['5432:5432']
+        env:
+          POSTGRES_PASSWORD: postgres
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
+
     steps:
       - uses: actions/checkout@v1
       - name: Setup Ruby
         uses: actions/setup-ruby@v1
         with:
-          ruby-version: 2.7
+          ruby-version: 2.7.x
       - uses: borales/actions-yarn@v2.0.0
         with:
           cmd: install
