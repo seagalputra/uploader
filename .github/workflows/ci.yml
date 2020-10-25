@@ -1,9 +1,23 @@
 name: Uploader
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
 jobs:
   test:
     runs-on: ubuntu-latest
-
+    services:
+      db:
+        image: postgres:11
+        ports: ['5432': '5432']
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     steps:
       - uses: actions/checkout@v1
       - name: Setup Ruby
@@ -15,9 +29,10 @@ jobs:
           cmd: install
       - name: Build and run tests
         env:
+          DATABASE_URL: postgres://postgres:@localhost:5432/uploader_test
           RAILS_ENV: test
         run: |
-          sudo apt-get -yqq install libsqlite3-dev
+          sudo apt-get -yqq install libpq-dev
           gem install bundler
           bundle install --jobs 4 --retry 3
           bundle exec rails db:prepare
