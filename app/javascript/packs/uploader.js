@@ -14,7 +14,7 @@ class Uploader {
 
     this.upload.create((error, blob) => {
       if (error) {
-        console.log('Upload error! Please try again.')
+        console.log(error)
       } else {
         const uploadForm = document.querySelector('#upload-form')
 
